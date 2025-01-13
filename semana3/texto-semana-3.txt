@@ -1,4 +1,8 @@
-uma (+): se utiliza para sumar dos valores.
+Semana 3
+Operadores aritméticos
+Los operadores aritméticos en Java se utilizan para realizar operaciones matemáticas básicas. Los operadores aritméticos incluyen:
+
+Suma (+): se utiliza para sumar dos valores.
 int a = 5;
 int b = 10;
 int c = a + b; // c es igual a 15
