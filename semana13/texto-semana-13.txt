@@ -1,0 +1,235 @@
+Semana 13
+HashMap en Java
+HashMap es una implementación de la interfaz Map en Java que almacena pares clave-valor.
+
+Crear un HashMap
+// Crear un HashMap vacío
+HashMap<String, Integer> map = new HashMap<>();
+
+// Crear con capacidad inicial
+HashMap<String, Integer> map2 = new HashMap<>(16);
+
+// Crear con capacidad inicial y factor de carga
+HashMap<String, Integer> map3 = new HashMap<>(16, 0.75f);
+
+// Crear desde otro Map
+Map<String, Integer> otroMap = new HashMap<>();
+HashMap<String, Integer> map4 = new HashMap<>(otroMap);
+
+Operaciones Básicas
+// Insertar elementos
+HashMap<String, Integer> edades = new HashMap<>();
+edades.put("Juan", 25);
+edades.put("María", 30);
+
+// Obtener un valor
+int edadJuan = edades.get("Juan"); // retorna 25
+Integer edadPedro = edades.get("Pedro"); // retorna null
+
+// Verificar si existe una clave
+boolean existeJuan = edades.containsKey("Juan"); // true
+
+// Verificar si existe un valor
+boolean existe30 = edades.containsValue(30); // true
+
+// Eliminar un elemento
+edades.remove("Juan");
+
+// Obtener tamaño
+int tamaño = edades.size();
+
+// Limpiar el HashMap
+edades.clear();
+
+Métodos Importantes
+HashMap<String, Integer> mapa = new HashMap<>();
+
+// putIfAbsent: inserta solo si la clave no existe
+mapa.putIfAbsent("clave", 100);
+
+// getOrDefault: obtiene valor o retorna valor por defecto
+int valor = mapa.getOrDefault("noExiste", 0);
+
+// replace: reemplaza el valor de una clave existente
+mapa.replace("clave", 200);
+
+// compute: calcula un nuevo valor
+mapa.compute("clave", (k, v) -> (v == null) ? 1 : v + 1);
+
+// computeIfAbsent: calcula valor si la clave no existe
+mapa.computeIfAbsent("nueva", k -> k.length());
+
+// computeIfPresent: calcula valor si la clave existe
+mapa.computeIfPresent("clave", (k, v) -> v + 10);
+
+// merge: combina el valor actual con uno nuevo
+mapa.merge("clave", 1, (oldValue, newValue) -> oldValue + newValue);
+
+Iterar un HashMap
+HashMap<String, Integer> frutas = new HashMap<>();
+frutas.put("Manzana", 1);
+frutas.put("Plátano", 2);
+frutas.put("Naranja", 3);
+
+// Iterar sobre las claves
+for (String fruta : frutas.keySet()) {
+    System.out.println("Fruta: " + fruta);
+}
+
+// Iterar sobre los valores
+for (Integer cantidad : frutas.values()) {
+    System.out.println("Cantidad: " + cantidad);
+}
+
+// Iterar sobre las entradas
+for (Map.Entry<String, Integer> entrada : frutas.entrySet()) {
+    System.out.println(entrada.getKey() + ": " + entrada.getValue());
+}
+
+// Usando forEach (Java 8+)
+frutas.forEach((k, v) -> System.out.println(k + ": " + v));
+
+Ejemplos Prácticos
+Ejemplo 1: Contador de palabras
+public class ContadorPalabras {
+    public static HashMap<String, Integer> contarPalabras(String texto) {
+        HashMap<String, Integer> contador = new HashMap<>();
+        String[] palabras = texto.toLowerCase().split("\\s+");
+        
+        for (String palabra : palabras) {
+            contador.merge(palabra, 1, Integer::sum);
+        }
+        return contador;
+    }
+}
+
+Ejemplo 2: Caché simple
+public class CacheSimple<K, V> {
+    private final HashMap<K, V> cache = new HashMap<>();
+    private final int capacidadMaxima;
+
+    public CacheSimple(int capacidadMaxima) {
+        this.capacidadMaxima = capacidadMaxima;
+    }
+
+    public void put(K key, V value) {
+        if (cache.size() >= capacidadMaxima) {
+            K primeraLlave = cache.keySet().iterator().next();
+            cache.remove(primeraLlave);
+        }
+        cache.put(key, value);
+    }
+
+    public V get(K key) {
+        return cache.get(key);
+    }
+}
+
+Ejemplo completo
+package com.example;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Main {
+    public static void main(String[] args) {
+         // 1. Ejemplo de gestión de un sistema de estudiantes
+         ejemploSistemaEstudiantes();
+        
+         // 2. Ejemplo de un carrito de compras
+         ejemploCarritoCompras();
+         
+         // 3. Ejemplo de contador de frecuencias
+         ejemploContadorFrecuencias();        
+         
+    }
+
+    // Ejemplo 1: Sistema de gestión de estudiantes
+    public static void ejemploSistemaEstudiantes() {
+        System.out.println("\n=== Sistema de Estudiantes ===");
+
+        // Crear HashMap para almacenar estudiantes (ID -> Calificaciones)
+        HashMap<Integer, ArrayList<Double>> calificacionesEstudiantes = new HashMap<>();
+
+        // Agregar calificaciones para algunos estudiantes
+        ArrayList<Double> calificacionesAlumno1 = new ArrayList<>();
+        calificacionesAlumno1.addAll(Arrays.asList(8.5, 9.0, 7.8));
+        calificacionesEstudiantes.put(101, calificacionesAlumno1);
+
+        ArrayList<Double> calificacionesAlumno2 = new ArrayList<>();
+        calificacionesAlumno2.addAll(Arrays.asList(6.5, 8.2, 9.3));
+        calificacionesEstudiantes.put(102, calificacionesAlumno2);
+
+        // Calcular promedio para cada estudiante
+        calificacionesEstudiantes.forEach((id, calificaciones) -> {
+            double promedio = calificaciones.stream()
+                    .mapToDouble(Double::doubleValue)
+                    .average()
+                    .orElse(0.0);
+            System.out.printf("Estudiante ID %d - Promedio: %.2f%n", id, promedio);
+        });
+
+        // Agregar nueva calificación a un estudiante existente
+        calificacionesEstudiantes.computeIfPresent(101, (id, calificaciones) -> {
+            calificaciones.add(8.7);
+            return calificaciones;
+        });
+
+        // Verificar si un estudiante existe
+        int idBuscar = 103;
+        System.out.println("¿Existe estudiante " + idBuscar + "? " +
+                calificacionesEstudiantes.containsKey(idBuscar));
+    }
+
+    // Ejemplo 2: Carrito de compras
+    public static void ejemploCarritoCompras() {
+        System.out.println("\n=== Carrito de Compras ===");
+
+        // HashMap para almacenar productos y cantidades
+        HashMap<String, Integer> carrito = new HashMap<>();
+
+        // Agregar productos
+        carrito.put("Manzanas", 3);
+        carrito.put("Leche", 2);
+        carrito.put("Pan", 1);
+
+        // Incrementar cantidad de un producto
+        carrito.merge("Manzanas", 2, Integer::sum);
+
+        // Mostrar carrito
+        System.out.println("Contenido del carrito:");
+        carrito.forEach((producto, cantidad) -> System.out.println(producto + ": " + cantidad + " unidades"));
+
+        // Remover un producto si la cantidad es 0
+        carrito.merge("Pan", -1, (actual, incremento) -> {
+            int resultado = actual + incremento;
+            return resultado <= 0 ? null : resultado;
+        });
+
+        // Mostrar total de productos
+        int totalProductos = carrito.values().stream().mapToInt(Integer::intValue).sum();
+        System.out.println("Total de productos: " + totalProductos);
+    }
+
+    // Ejemplo 3: Contador de frecuencias de palabras
+    public static void ejemploContadorFrecuencias() {
+        System.out.println("\n=== Contador de Frecuencias ===");
+
+        String texto = "java es un lenguaje java es orientado a objetos java";
+        HashMap<String, Integer> frecuencias = new HashMap<>();
+
+        // Contar frecuencias
+        Arrays.stream(texto.toLowerCase().split(" "))
+                .forEach(palabra -> frecuencias.merge(palabra, 1, Integer::sum));
+
+        // Mostrar resultados ordenados por frecuencia
+        frecuencias.entrySet().stream()
+                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+                .forEach(entrada -> System.out.println(entrada.getKey() +
+                        ": " + entrada.getValue() + " veces"));
+    }
+
+   
+}

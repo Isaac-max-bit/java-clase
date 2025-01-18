@@ -1,0 +1,295 @@
+Semana 10
+Métodos en Java
+Los métodos en Java son bloques de código reutilizables que realizan una tarea específica. Son la piedra angular de la programación orientada a objetos y te permiten organizar tu código de manera eficiente y modular. A continuación, te presento una explicación completa de los métodos, incluyendo sus diferentes formas de uso:
+
+1. Estructura Básica de un Método:
+public static void miMetodo() {
+    // Código que realiza la tarea del método
+    System.out.println("¡Hola desde el método!");
+}
+
+Modificador de acceso: public indica que el método puede ser accedido desde cualquier parte del programa. Otros modificadores son private, protected y default.
+Palabra clave static: Indica que el método pertenece a la clase y no a un objeto específico. Para usar métodos estáticos, no necesitas crear una instancia de la clase.
+Tipo de retorno: void indica que el método no devuelve ningún valor. Puedes usar otros tipos como int, String, etc., para devolver un valor específico.
+Nombre del método: miMetodo debe ser descriptivo e indicar la función del método.
+Parámetros: Un método puede recibir información a través de parámetros. Estos se declaran entre paréntesis y son variables locales al método.
+Cuerpo del método: Entre llaves ({}) se escribe el código que define la tarea del método.
+2. Tipos de Métodos:
+a) Métodos con Retorno:
+
+Estos métodos devuelven un valor específico. El tipo de retorno debe coincidir con el valor devuelto por la instrucción return.
+
+public static int suma(int a, int b) {
+    return a + b;
+}
+
+b) Métodos sin Retorno (void):
+
+Estos métodos no devuelven ningún valor. Son útiles para realizar acciones que no requieren un resultado directo.
+
+public static void mostrarMensaje(String mensaje) {
+    System.out.println(mensaje);
+}
+
+3. Parámetros y Argumentos:
+Parámetros: Son variables declaradas en la definición del método que reciben datos.
+Argumentos: Son los valores reales que se pasan al método al invocarlo.
+public static void saludar(String nombre) { // "nombre" es un parámetro
+    System.out.println("¡Hola, " + nombre + "!");
+}
+
+public static void main(String[] args) {
+    saludar("Juan"); // "Juan" es un argumento
+}
+
+4. Invocación de Métodos:
+Para ejecutar un método, debes invocarlo con su nombre y los argumentos necesarios:
+
+int resultado = suma(5, 3); // Invocar el método "suma"
+mostrarMensaje("¡Este es un mensaje!"); // Invocar el método "mostrarMensaje"
+
+5. Sobrecarga de Métodos:
+Puedes tener varios métodos con el mismo nombre pero con diferentes tipos o número de parámetros. Esto se conoce como sobrecarga de métodos.
+
+public static int suma(int a, int b) {
+    return a + b;
+}
+
+public static double suma(double a, double b) {
+    return a + b;
+}
+
+6. Recursividad:
+Un método puede llamarse a sí mismo dentro de su código. Esto se conoce como recursividad.
+
+public static int factorial(int n) {
+    if (n == 0) {
+        return 1;
+    } else {
+        return n * factorial(n-1);
+    }
+}
+
+7. Ejemplo
+Restaurante Simple: Un programa para manejar pedidos y aplicar descuentos
+Este código en Java implementa un sencillo sistema de pedidos para un restaurante. Permite al usuario navegar por un menú, agregar platos a su orden y calcular el total, incluyendo un descuento opcional.
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class RestauranteSimple {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Menú del restaurante (usando listas)
+        List<String[]> menu = new ArrayList<>();
+        menu.add(new String[] {"Pizza Margherita", "10.0"});
+        menu.add(new String[] {"Pasta Carbonara", "8.5"});
+        menu.add(new String[] {"Ensalada César", "7.0"});
+        menu.add(new String[] {"Hamburguesa", "9.5"});
+
+        // Orden del cliente (usando listas)
+        List<String[]> orden = new ArrayList<>();
+        double total = 0;
+
+        // Mostrar el menú y pedir al usuario que agregue platos
+        mostrarMenu(menu);
+        while (true) {
+            System.out.println("Ingrese el nombre del plato a agregar (o 'fin' para terminar):");
+            String nombrePlato = scanner.nextLine();
+            if (nombrePlato.equalsIgnoreCase("fin")) {
+                break;
+            }
+            String[] plato = encontrarPlato(menu, nombrePlato);
+            if (plato != null) {
+                orden.add(plato);
+                total += Double.parseDouble(plato[1]);
+            } else {
+                System.out.println("Plato no encontrado en el menú.");
+            }
+        }
+
+        // Mostrar la orden completa
+        mostrarOrden(orden, total);
+
+        // Calcular el total con descuento
+        double descuento = aplicarDescuento(total, 10);
+        System.out.println("Total con descuento del 10%: $" + descuento);
+
+        scanner.close();
+    }
+
+    // Método para mostrar el menú
+    static void mostrarMenu(List<String[]> menu) {
+        System.out.println("Menú:");
+        for (String[] plato : menu) {
+            System.out.println("- " + plato[0] + " - $" + plato[1]);
+        }
+    }
+
+    // Método para encontrar un plato en el menú
+    static String[] encontrarPlato(List<String[]> menu, String nombre) {
+        for (String[] plato : menu) {
+            if (plato[0].equalsIgnoreCase(nombre)) {
+                return plato;
+            }
+        }
+        return null;
+    }
+
+    // Método para mostrar la orden completa
+    static void mostrarOrden(List<String[]> orden, double total) {
+        System.out.println("Orden:");
+        for (String[] plato : orden) {
+            System.out.println("- " + plato[0] + " - $" + plato[1]);
+        }
+        System.out.println("Total: $" + total);
+    }
+
+    // Método para aplicar un descuento
+    static double aplicarDescuento(double total, double porcentaje) {
+        return total - (total * (porcentaje / 100));
+    }
+}
+
+
+Explicación:
+
+Importaciones: El código comienza importando las clases necesarias de la biblioteca java.util, como ArrayList, List y Scanner. Estas clases se utilizan para trabajar con listas y obtener entrada del usuario.
+
+Clase RestauranteSimple: Define la clase principal del programa llamada RestauranteSimple, la cual contiene el método main que es el punto de entrada del programa.
+
+Inicialización: En el método main, se crea un objeto Scanner para leer la entrada del usuario, se inicializan dos listas (menu y orden) para almacenar los platos del menú y los platos seleccionados por el usuario, respectivamente. Se inicializa la variable total a 0 para llevar la cuenta del precio total de la orden.
+
+Mostrar Menú: La función mostrarMenu imprime el menú del restaurante en la consola.
+
+Tomar Pedidos: El programa entra en un ciclo while que solicita al usuario que ingrese el nombre del plato que desea agregar a su orden. Si el usuario escribe "fin", el ciclo termina. Para cada plato ingresado, el programa busca el plato en el menú usando la función encontrarPlato. Si el plato se encuentra, se agrega a la lista de orden y se actualiza el total.
+
+Mostrar Orden: La función mostrarOrden imprime la orden completa del usuario junto con el total.
+
+Aplicar Descuento: Finalmente, el programa calcula el total con un descuento del 10% usando la función aplicarDescuento y lo imprime en la consola.
+
+Actividad: Máquina Expendedora utilizando métodos
+Objetivo: Simular una máquina expendedora en Java.
+
+Requisitos:
+
+La máquina debe tener un inventario de productos con nombre, precio y cantidad.
+El usuario puede ver el menú de productos disponibles.
+El usuario puede seleccionar un producto y pagar con dinero en efectivo.
+La máquina debe verificar si el usuario ingresó suficiente dinero para comprar el producto.
+Si el pago es correcto, la máquina debe entregar el producto y mostrar el cambio.
+Si no hay suficiente producto en el inventario, la máquina debe mostrar un mensaje de error.
+Se debe manejar el caso de un pago insuficiente.
+Instrucciones Paso a Paso:
+
+Definir el Inventario:
+
+Crear tres arreglos:
+String[] productos: Para almacenar los nombres de los productos.
+double[] precios: Para almacenar los precios de los productos.
+int[] cantidades: Para almacenar las cantidades disponibles de cada producto.
+Inicializar estos arreglos con valores de ejemplo (nombre, precio, cantidad) para 3 o 4 productos.
+Mostrar Menú:
+
+Implementar una función mostrarMenu() que imprime el menú de la máquina expendedora.
+Recorre el arreglo productos y para cada producto, imprime su nombre y precio.
+Seleccionar Producto:
+
+Implementar una función seleccionarProducto() que:
+Solicita al usuario que ingrese el nombre del producto que desea comprar.
+Busca el nombre del producto ingresado en el arreglo productos y devuelve su índice (o -1 si no lo encuentra).
+Verificar Pago:
+
+Implementar una función verificarPago() que:
+Recibe como parámetros el índice del producto seleccionado y la cantidad de dinero ingresada por el usuario.
+Obtiene el precio del producto usando el índice del producto en el arreglo precios.
+Compara la cantidad de dinero ingresada con el precio del producto.
+Devuelve true si la cantidad es suficiente y false si no lo es.
+Calcular Cambio:
+
+Implementar una función calcularCambio() que:
+Recibe como parámetros el índice del producto seleccionado y la cantidad de dinero ingresada por el usuario.
+Calcula el cambio restando el precio del producto a la cantidad de dinero ingresada.
+Devuelve el cambio calculado.
+Entregar Producto:
+
+Implementar una función entregarProducto() que:
+Recibe como parámetro el índice del producto seleccionado.
+Verifica si la cantidad disponible del producto (en el arreglo cantidades) es mayor a 0. Si no, imprime un mensaje de error indicando que no hay stock.
+Si hay stock, decrementa la cantidad disponible del producto en 1.
+Imprime un mensaje indicando que el producto ha sido entregado.
+Bucle Principal:
+
+Implementar un bucle while que se ejecuta hasta que el usuario ingrese un comando para salir.
+Dentro del bucle:
+Llama a la función mostrarMenu() para mostrar el menú de productos.
+Solicita al usuario que ingrese el nombre del producto deseado.
+Llama a la función seleccionarProducto() para obtener el índice del producto seleccionado.
+Si el índice es válido:
+Solicita al usuario que ingrese la cantidad de dinero.
+Llama a la función verificarPago() para comprobar si el pago es suficiente.
+Si el pago es suficiente:
+Llama a la función entregarProducto() para entregar el producto.
+Llama a la función calcularCambio() para calcular el cambio.
+Imprime el cambio calculado.
+Si el pago no es suficiente:
+Imprime un mensaje de error indicando que el pago es insuficiente.
+Si el índice es inválido:
+Imprime un mensaje de error indicando que el producto no está disponible.
+Ejemplo de Código:
+
+import java.util.Scanner;
+
+public class MaquinaExpendedora {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Inventario de productos
+        String[] productos = {"Coca-Cola", "Pepsi", "Agua", "Galletas"};
+        double[] precios = {2.5, 2.0, 1.5, 1.0};
+        int[] cantidades = {10, 15, 20, 12};
+
+        // Bucle principal
+        while (true) {
+            mostrarMenu(productos, precios);
+
+            System.out.print("Ingrese el nombre del producto que desea comprar (o 'salir' para terminar): ");
+            String producto = scanner.nextLine();
+
+            if (producto.equalsIgnoreCase("salir")) {
+                break;
+            }
+
+            int indice = seleccionarProducto(productos, producto);
+            if (indice != -1) {
+                System.out.print("Ingrese la cantidad de dinero: ");
+                double dinero = scanner.nextDouble();
+                scanner.nextLine(); // Consumir el salto de línea
+
+                if (verificarPago(indice, precios, dinero)) {
+                    entregarProducto(indice, cantidades);
+                    double cambio = calcularCambio(indice, precios, dinero);
+                    System.out.println("Cambio: " + cambio);
+                } else {
+                    System.out.println("Pago insuficiente.");
+                }
+            } else {
+                System.out.println("Producto no encontrado.");
+            }
+        }
+
+        scanner.close();
+    }
+
+    // ... Funciones mostrarMenu(), seleccionarProducto(), verificarPago(), calcularCambio(), entregarProducto() ...
+}
+
+
+Resolver:
+
+Implementar las funciones restantes (mostrarMenu(), seleccionarProducto(), verificarPago(), calcularCambio(), entregarProducto()) de acuerdo con las especificaciones descritas en las instrucciones.
+Adaptar el código a tus necesidades, incluyendo más productos, diferentes precios y cantidades.

@@ -1,0 +1,299 @@
+Semana 5
+Arrays en Java y sus métodos
+Los arrays son estructuras de datos fundamentales en Java que permiten almacenar colecciones ordenadas de elementos del mismo tipo. A continuación, se detalla su funcionamiento y algunos métodos útiles:
+
+Creación de un array
+Existen dos formas principales para crear un array en Java:
+
+1. Declaración y asignación de tamaño
+int[] numeros = new int[10];  // Crea un array de enteros con capacidad para 10 elementos
+
+2. Inicialización directa
+String[] nombres = {"Juan", "Maria", "Pedro"};  // Crea un array de strings con valores iniciales
+
+
+Acceso a elementos
+Se accede a los elementos de un array utilizando su índice, que comienza en 0 y va hasta la longitud del array menos 1.
+
+numeros[0] = 25;  // Asigna el valor 25 al primer elemento del array de enteros
+String nombre = nombres[1];  // Almacena el valor "Maria" en la variable nombre
+
+Métodos de la clase Arrays
+Java proporciona la clase Arrays que contiene métodos útiles para trabajar con arrays:
+
+length(array): Devuelve la longitud del array (número de elementos).
+toString(array): Convierte el array a una cadena de texto representativa.
+sort(array): Ordena los elementos del array en orden ascendente.
+fill(array, value): Rellena el array con un valor específico.
+copyOf(array, newLength): Crea una copia del array con una nueva longitud.
+binarySearch(array, value): Busca un elemento en el array usando búsqueda binaria (requiere el array ordenado).
+equals(array1, array2): Comprueba si dos arrays son iguales.
+Ejemplo de uso de métodos
+int[] numeros = {5, 2, 8, 1, 3};
+
+System.out.println("Longitud del array: " + numeros.length);  // Imprime 5
+
+Arrays.sort(numeros);  // Ordena el array
+
+System.out.println("Array ordenado: " + Arrays.toString(numeros));  // Imprime [1, 2, 3, 5, 8]
+
+Arrays.fill(numeros, 0);  // Rellena el array con ceros
+
+System.out.println("Array con ceros: " + Arrays.toString(numeros));  // Imprime [0, 0, 0, 0, 0]
+
+
+Notas:
+Los arrays en Java son de tamaño fijo. Una vez creado el array, no se puede cambiar su tamaño.
+Se puede recorrer un array utilizando bucles for o while.
+Existen alternativas a los arrays, como las listas ArrayList de la librería Collections Framework, que ofrecen mayor flexibilidad en cuanto al tamaño y operaciones.
+ArrayList
+¿Qué es un ArrayList?
+ArrayList es una clase que pertenece a la librería Java Collections Framework (JCF). Es una implementación de la interfaz List y representa una lista redimensionable de elementos. A diferencia de los arrays tradicionales, que tienen un tamaño fijo, un ArrayList puede crecer o decrecer dinámicamente según se necesiten agregar o eliminar elementos.
+
+Creando un ArrayList
+Para crear un ArrayList, se utiliza la clase ArrayList e importamos el paquete java.util.
+
+import java.util.ArrayList;
+
+ArrayList<String> nombres = new ArrayList<String>();  // Crea un ArrayList para almacenar cadenas de texto
+
+
+Métodos principales de ArrayList
+add(element): Agrega un elemento al final de la lista.
+get(index): Obtiene el elemento en la posición especificada por el índice (comienza en 0).
+remove(index): Elimina el elemento en la posición especificada por el índice.
+remove(element): Elimina la primera ocurrencia del elemento especificado.
+size(): Devuelve el número de elementos en la lista.
+isEmpty(): Comprueba si la lista está vacía.
+contains(element): Comprueba si la lista contiene el elemento especificado.
+clear(): Elimina todos los elementos de la lista.
+indexOf(element): Devuelve el índice de la primera ocurrencia del elemento especificado, o -1 si no se encuentra.
+lastIndexOf(element): Devuelve el índice de la última ocurrencia del elemento especificado, o -1 si no se encuentra.
+set(index, element): Reemplaza el elemento en la posición especificada por el índice con el nuevo elemento.
+Ejemplo de uso de métodos
+ArrayList<Integer> numeros = new ArrayList<>();
+
+numeros.add(10);  // Agrega el elemento 10 al final de la lista
+numeros.add(20);  // Agrega el elemento 20 al final de la lista
+
+int primerElemento = numeros.get(0);  // Almacena el valor 10 en la variable primerElemento
+numeros.remove(1);  // Elimina el elemento en la posición 1 (el valor 20)
+
+System.out.println("Tamaño de la lista: " + numeros.size());  // Imprime 1 (un elemento restante)
+System.out.println("¿La lista está vacía? " + numeros.isEmpty());  // Imprime false
+
+
+Beneficios de usar ArrayList
+Tamaño dinámico: Se adapta a la cantidad de elementos que se necesiten almacenar.
+Orden: Mantiene el orden de inserción de los elementos.
+Acceso aleatorio: Se puede acceder a cualquier elemento por su índice.
+Métodos útiles: Proporciona métodos para agregar, eliminar, buscar y manipular elementos.
+Notas
+ArrayList solo permite almacenar elementos del mismo tipo de dato (por ejemplo, todos enteros o todas cadenas de texto).
+Para almacenar diferentes tipos de datos, se pueden utilizar otras clases de la librería JCF como ArrayList<Object>, pero se pierde la seguridad de tipos.
+Existen otras implementaciones de List en JCF que pueden ser más eficientes para operaciones específicas (por ejemplo, LinkedList para accesos frecuentes al inicio o medio de la lista).
+La Clase Arrays en Java
+La clase Arrays en Java es una herramienta esencial para manipular y trabajar con arrays de manera eficiente y organizada. No es un tipo de dato en sí mismo, sino una clase con métodos estáticos que te permiten realizar diversas operaciones sobre arrays.
+
+¿Para qué sirve la clase Arrays?
+
+La clase Arrays ofrece una amplia gama de métodos para realizar operaciones comunes con arrays, como:
+
+Creación: Puedes crear arrays con valores predeterminados o inicializados con datos específicos.
+Comparación: Puedes comparar si dos arrays son iguales o no.
+Búsqueda: Puedes buscar un elemento específico dentro de un array.
+Ordenación: Puedes ordenar los elementos de un array en orden ascendente o descendente.
+Conversión: Puedes convertir un array a una cadena de texto o a otro tipo de dato.
+Manipulación: Puedes rellenar un array con un valor específico, copiar un array o crear una copia con una nueva longitud.
+Métodos Destacados de la Clase Arrays:
+
+Arrays.toString(array): Convierte un array a una cadena de texto que muestra sus elementos separados por comas.
+Arrays.equals(array1, array2): Comprueba si dos arrays son iguales, considerando el tipo y el valor de cada elemento.
+Arrays.sort(array): Ordena los elementos del array en orden ascendente.
+Arrays.binarySearch(array, value): Busca un valor en un array ordenado utilizando búsqueda binaria. Devuelve la posición del valor si se encuentra, o un valor negativo si no está presente.
+Arrays.fill(array, value): Rellena un array con un valor específico.
+Arrays.copyOf(array, newLength): Crea una copia de un array con una nueva longitud especificada.
+Ejemplo Práctico:
+
+import java.util.Arrays;
+
+public class EjemploArrays {
+
+    public static void main(String[] args) {
+        int[] numeros = {5, 2, 8, 1, 3};
+
+        System.out.println("Array original: " + Arrays.toString(numeros)); // Imprime [5, 2, 8, 1, 3]
+
+        Arrays.sort(numeros); // Ordena el array
+
+        System.out.println("Array ordenado: " + Arrays.toString(numeros)); // Imprime [1, 2, 3, 5, 8]
+
+        int indice = Arrays.binarySearch(numeros, 3); // Busca el valor 3
+        System.out.println("Índice del valor 3: " + indice); // Imprime 2 (la posición del valor 3)
+
+        Arrays.fill(numeros, 0); // Rellena el array con ceros
+
+        System.out.println("Array con ceros: " + Arrays.toString(numeros)); // Imprime [0, 0, 0, 0, 0]
+    }
+}
+
+
+Beneficios de Usar la Clase Arrays:
+
+Facilidad de uso: Los métodos de la clase Arrays son fáciles de entender y usar.
+Eficiencia: Los métodos de Arrays están optimizados para trabajar con arrays de manera eficiente.
+Consistencia: La clase Arrays proporciona una forma consistente de manipular arrays en Java.
+Ejemplos de los Métodos de la Clase Arrays en Java
+Aquí tienes ejemplos de cada método importante de la clase Arrays en Java:
+
+1. Arrays.toString(array):
+
+import java.util.Arrays;
+
+public class EjemploToString {
+
+    public static void main(String[] args) {
+        int[] numeros = {5, 2, 8, 1, 3};
+
+        System.out.println("Array como cadena: " + Arrays.toString(numeros));
+        // Salida: Array como cadena: [5, 2, 8, 1, 3]
+    }
+}
+
+2. Arrays.equals(array1, array2):
+
+import java.util.Arrays;
+
+public class EjemploEquals {
+
+    public static void main(String[] args) {
+        int[] arr1 = {1, 2, 3, 4, 5};
+        int[] arr2 = {1, 2, 3, 4, 5};
+        int[] arr3 = {1, 2, 3, 6, 5};
+
+        boolean iguales1 = Arrays.equals(arr1, arr2);
+        boolean iguales2 = Arrays.equals(arr1, arr3);
+
+        System.out.println("arr1 y arr2 son iguales: " + iguales1); 
+        // Salida: arr1 y arr2 son iguales: true
+
+        System.out.println("arr1 y arr3 son iguales: " + iguales2); 
+        // Salida: arr1 y arr3 son iguales: false
+    }
+}
+
+3. Arrays.sort(array):
+
+import java.util.Arrays;
+
+public class EjemploSort {
+
+    public static void main(String[] args) {
+        int[] numeros = {5, 2, 8, 1, 3};
+
+        System.out.println("Array original: " + Arrays.toString(numeros)); 
+        // Salida: Array original: [5, 2, 8, 1, 3]
+
+        Arrays.sort(numeros);
+
+        System.out.println("Array ordenado: " + Arrays.toString(numeros));
+        // Salida: Array ordenado: [1, 2, 3, 5, 8]
+    }
+}
+
+4. Arrays.binarySearch(array, value):
+
+import java.util.Arrays;
+
+public class EjemploBinarySearch {
+
+    public static void main(String[] args) {
+        int[] numeros = {1, 2, 3, 5, 8};
+
+        int indice = Arrays.binarySearch(numeros, 3);
+        System.out.println("Índice del valor 3: " + indice);
+        // Salida: Índice del valor 3: 2
+
+        indice = Arrays.binarySearch(numeros, 7);
+        System.out.println("Índice del valor 7: " + indice);
+        // Salida: Índice del valor 7: -4 (el valor no está en el array)
+    }
+}
+
+5. Arrays.fill(array, value):
+
+import java.util.Arrays;
+
+public class EjemploFill {
+
+    public static void main(String[] args) {
+        int[] numeros = {1, 2, 3, 5, 8};
+
+        System.out.println("Array original: " + Arrays.toString(numeros)); 
+        // Salida: Array original: [1, 2, 3, 5, 8]
+
+        Arrays.fill(numeros, 0);
+
+        System.out.println("Array con ceros: " + Arrays.toString(numeros));
+        // Salida: Array con ceros: [0, 0, 0, 0, 0]
+    }
+}
+
+6. Arrays.copyOf(array, newLength):
+
+import java.util.Arrays;
+
+public class EjemploCopyOf {
+
+    public static void main(String[] args) {
+        int[] numeros = {1, 2, 3, 5, 8};
+
+        int[] copia = Arrays.copyOf(numeros, 3); 
+
+        System.out.println("Copia del array (longitud 3): " + Arrays.toString(copia));
+        // Salida: Copia del array (longitud 3): [1, 2, 3]
+    }
+}
+
+Actividad de clase
+Ejercicios de Array sin utilizar ciclos:
+Intercambio de elementos: Crea un array de enteros con 5 elementos. Intercambia el primer elemento con el último elemento del array.
+
+Verificar igualdad: Crea dos arrays de enteros con 5 elementos cada uno. Comprueba si los dos arrays son iguales.
+
+Encontrar el elemento máximo: Crea un array de enteros con 5 elementos. Encuentra el elemento máximo del array.
+
+Encontrar el elemento mínimo: Crea un array de enteros con 5 elementos. Encuentra el elemento mínimo del array.
+
+Suma de elementos: Crea un array de enteros con 5 elementos. Calcula la suma de todos los elementos del array.
+
+Promedio de elementos: Crea un array de enteros con 5 elementos. Calcula el promedio de todos los elementos del array.
+
+Contar elementos pares: Crea un array de enteros con 5 elementos. Cuenta la cantidad de elementos pares del array.
+
+Contar elementos impares: Crea un array de enteros con 5 elementos. Cuenta la cantidad de elementos impares del array.
+
+Verificar si un elemento existe: Crea un array de enteros con 5 elementos. Verifica si un elemento específico existe en el array.
+
+Invertir un array: Crea un array de enteros con 5 elementos. Invierte el orden de los elementos del array.
+
+Ejercicios de ArrayList sin utilizar ciclos:
+Agregar un elemento al principio: Crea un ArrayList de String. Agrega un nuevo elemento al principio del ArrayList.
+
+Agregar un elemento al final: Crea un ArrayList de String. Agrega un nuevo elemento al final del ArrayList.
+
+Eliminar el último elemento: Crea un ArrayList de String. Elimina el último elemento del ArrayList.
+
+Eliminar el primer elemento: Crea un ArrayList de String. Elimina el primer elemento del ArrayList.
+
+Obtener el último elemento: Crea un ArrayList de String. Obtiene el último elemento del ArrayList.
+
+Obtener el primer elemento: Crea un ArrayList de String. Obtiene el primer elemento del ArrayList.
+
+Verificar si el ArrayList está vacío: Crea un ArrayList de String. Comprueba si el ArrayList está vacío.
+
+Obtener el tamaño del ArrayList: Crea un ArrayList de String. Obtiene el tamaño del ArrayList.
+
+Verificar si un elemento existe: Crea un ArrayList de String. Verifica si un elemento específico existe en el ArrayList.
+
+Obtener el índice de un elemento: Crea un ArrayList de String. Obtiene el índice de un elemento específico del ArrayList.
